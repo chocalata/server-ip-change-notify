@@ -1,0 +1,10 @@
+1. Crear en bash script para que genera y arranca la imagen de docker.
+
+- ignorar whatsapp-data en la creación de la imagen
+- usar volumen al generar la imagen
+- añadir variable de entorno del cha
+
+Comandos:
+docker build -f Dockerfile.local -t test .
+docker rm -f test && docker run --name test test
+docker container logs test
