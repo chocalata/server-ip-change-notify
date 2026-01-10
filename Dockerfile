@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64/v8 node:22
+FROM --platform=linux/arm64/v8 node:24
 RUN apt update && apt -y upgrade
 COPY debian-dependencies-chrome-whatsappweb.txt /debian-dependencies-chrome-whatsappweb.txt
 

@@ -38,7 +38,8 @@ class WhatsAppController {
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
-          '--disable-extensions'
+          '--disable-extensions',
+          `--user-data-dir=${path.join(__dirname, WHATSAPP_DATA_DIR)}`
         ],
         headless: true
       },
