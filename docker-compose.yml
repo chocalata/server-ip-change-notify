@@ -1,0 +1,11 @@
+services:
+  server-ip-change-notify:
+    container_name: server-ip-change-notify
+    build:
+      context: ./server-ip-change-notify
+      dockerfile: Dockerfile.local
+    env_file:
+      - ./server-ip-change-notify/src/.env
+    volumes:
+      - ./server-ip-change-notify/src/whatsapp-data:/usr/src/app/whatsapp-data
+      - ./server-ip-change-notify/src/app-data:/usr/src/app/app-data

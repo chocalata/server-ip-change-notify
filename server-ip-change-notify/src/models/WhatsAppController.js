@@ -75,6 +75,30 @@ class WhatsAppController {
     this.#client = client
   }
 
+  async destroy() {
+    if (this.#client) {
+      await this.#client.destroy()
+      console.info('WhatsApp client destroyed.')
+    }
+
+    this.#clientIsReady = false
+  }
+
+  isWaitingForClientReady() {
+    return !this.#clientIsReady
+  }
+
+  checkIsReadyPromise() {
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        if (this.#clientIsReady) {
+          clearInterval(interval)
+          resolve(true)
+        }
+      }, 500)
+    })
+  }
+
   sendMessage(message, chatId = WHATSAPP_CHAT_WEB_CONTACT) {
     if (!this.#clientIsReady) {
       console.error('Client is not ready yet!')
@@ -94,7 +118,8 @@ class WhatsAppController {
     return this.#client
       .getChatById(target)
       .then((chat) => {
-        return chat.sendMessage(message).then((msg) => {
+        return chat.sendMessage(message, { sendSeen: false }).then((msg) => {
+          // sendSeen false to avoid an error https://github.com/pedroslopez/whatsapp-web.js/issues/5718 probably on new updated is corrected
           console.info(`Message sent: ${msg.body}`)
           return msg
         })

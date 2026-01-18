@@ -6,7 +6,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
-		"local": "nodemon --env-file=.env index.js"
+		"local": "nodemon --env-file=.env --ignore ./node_modules/ --legacy-watch -e ejs,css,js index.js"
 	},
 	"author": "Catalin Trandafir",
 	"license": "ISC",
